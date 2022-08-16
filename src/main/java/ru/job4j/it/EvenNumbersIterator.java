@@ -9,9 +9,9 @@ import java.util.NoSuchElementException;
     * @since 27.07.2022
     */
 public class EvenNumbersIterator implements Iterator<Integer> {
+    private final int[] data;
+    private int index = 0;
 
-    private int[] data;
-    private int index;
 
     /**
      * Конструктор
@@ -19,24 +19,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
      */
     public EvenNumbersIterator(int[] data) {
         this.data = data;
-        index = -1;
-        index = findEvenNumber();
-    }
-
-    /**
-     * Ищет следующее четное число после указателя в массиве
-     * Если число не найдено, возвращает -1
-     * @return индекс четного числа в массиве, либо -1
-     */
-    public int findEvenNumber() {
-        int result = -1;
-        for (int i = this.index + 1; i < this.data.length; i++) {
-            if (data[i] % 2 == 0) {
-                result = i;
-                break;
-            }
-        }
-        return result;
     }
 
     /**
@@ -46,7 +28,13 @@ public class EvenNumbersIterator implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        return (this.index != -1);
+        while (data.length > index) {
+            if (data[index] % 2 == 0) {
+                break;
+            }
+            index++;
+        }
+        return data.length > index;
     }
 
     /**
@@ -56,11 +44,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
      */
     @Override
     public Integer next() {
-        if (this.index == -1) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        int result = data[index];
-        index = findEvenNumber();
-        return result;
+        return data[index++];
     }
 }
