@@ -3,7 +3,7 @@ package ru.job4j.asserj;
 public class Box {
     private static final String UNKNOWN = "Unknown Object";
     private int vertex;
-    private int edge;
+    private final int edge;
     private String type = "";
 
     public Box(int vertex, int edge) {
