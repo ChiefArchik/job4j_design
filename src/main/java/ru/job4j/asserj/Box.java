@@ -13,7 +13,7 @@ public class Box {
     }
 
     private void init() {
-        type =  switch (vertex) {
+        type = switch (vertex) {
             case 0 -> "Sphere";
             case 4 -> "Tetrahedron";
             case 8 -> "Cube";
@@ -41,11 +41,12 @@ public class Box {
     }
 
     public double getArea() {
+        int e = edge;
          return switch (vertex) {
-            case 0 -> 4 * Math.PI * (edge * edge);
-            case 4 -> Math.sqrt(3) * (edge * edge);
-            case 8 -> 6 * (edge * edge);
+            case 0 -> 4 * Math.PI * (e * e);
+            case 4 -> Math.sqrt(3) * (e * e);
+            case 8 -> 6 * (e * e);
             default -> 0;
-        };
+         };
     }
 }
